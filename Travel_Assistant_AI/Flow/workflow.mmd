@@ -1,0 +1,11 @@
+graph TD
+    User([User Input: Destination]) --> Agent[LangChain Agent]
+    Agent --> Tool1[Weather Tool]
+    Agent --> Tool2[Attractions Tool]
+    Tool1 --> WAPI((WeatherAPI.com))
+    Tool2 --> DDG((DuckDuckGo Search))
+    WAPI --> Agent
+    DDG --> Agent
+    Agent --> Gemini[Gemini 2.5 Flash Synthesis]
+    Gemini --> Summary[Final Travel Summary]
+    Summary --> User
