@@ -1,0 +1,17 @@
+graph TD
+    A[User Input] --> B{Agent Executor}
+    B --> C[Check Chat History]
+    C --> D[Gemini 2.5 Flash reasoning]
+    D --> E{Need Search?}
+    E -- Yes --> F[Competitor Search Tool]
+    E -- Yes --> G[Footfall Analysis Tool]
+    F --> H[DuckDuckGo Search]
+    G --> H
+    H --> I[Tool Result Returned]
+    I --> D
+    E -- No --> J[Generate Final Response]
+    J --> K{Save Report Requested?}
+    K -- Yes --> L[Write Markdown to /reports]
+    K -- No --> M[Display to User]
+    L --> M
+    M --> A
