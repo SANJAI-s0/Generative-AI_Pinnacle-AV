@@ -1,0 +1,22 @@
+graph TD
+    A[Data Acquisition: Sentiment140 Dataset] --> B[Data Cleaning & Mapping]
+    B --> B1[Mapping Labels: 0-Neg, 4-Pos]
+    B --> B2[Text Preprocessing: Regex, Stopwords]
+    
+    B1 --> C[Exploratory Data Analysis - EDA]
+    C --> D[Data Splitting: Train/Val/Test]
+    
+    D --> E1[BERT Tokenization]
+    D --> E2[Sequence Padding & Tokenization]
+    
+    E1 --> F1[Model 1: BERT Fine-Tuning]
+    E2 --> F2[Model 2: RNN]
+    E2 --> F3[Model 3: LSTM]
+    E2 --> F4[Model 4: GRU]
+    
+    F1 --> G[Comparative Evaluation]
+    F2 --> G
+    F3 --> G
+    F4 --> G
+    
+    G --> H[Final Analysis & Visualization]

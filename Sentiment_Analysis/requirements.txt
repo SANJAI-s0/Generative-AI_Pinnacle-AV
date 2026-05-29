@@ -1,0 +1,13 @@
+tensorflow
+torch
+transformers
+pandas
+numpy
+scikit-learn
+matplotlib
+seaborn
+nltk
+wordcloud
+jupyter
+tqdm
+kagglehub
