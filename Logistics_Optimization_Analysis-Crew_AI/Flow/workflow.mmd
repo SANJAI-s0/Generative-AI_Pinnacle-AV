@@ -1,0 +1,11 @@
+graph TD
+    User([User Input: Products]) --> Crew[CrewAI Orchestrator]
+    Crew --> Task1[Logistics Analysis Task]
+    Task1 --> Agent1[Logistics Analyst Agent]
+    Agent1 --> Gemini[Gemini 2.5 Flash]
+    Gemini --> Report[Logistics Analysis Report]
+    Report --> Task2[Optimization Strategy Task]
+    Task2 --> Agent2[Optimization Strategist Agent]
+    Agent2 --> Gemini
+    Gemini --> FinalStrategy[Final Optimization Strategy Document]
+    FinalStrategy --> User
