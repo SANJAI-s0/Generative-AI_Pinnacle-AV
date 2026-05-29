@@ -1,0 +1,21 @@
+flowchart TD
+    A([👤 User]) -->|Shares bill image path/URL| B[UserProxy Agent]
+    B -->|Initiates chat with image input| C[GroupChatManager]
+
+    C -->|Routes to| D[BillProcessingAgent]
+    D -->|Reads & analyzes image| E{Extract Line Items}
+    E -->|Categorize into:\nGroceries · Dining · Utilities\nShopping · Entertainment · Other| F[Categorized Expense List + JSON]
+
+    F -->|Passes structured data| C
+    C -->|Routes to| G[ExpenseSummarizationAgent]
+    G -->|Aggregates totals per category| H{Spending Analysis}
+    H -->|Identifies highest spend\nFlags unusual items\nProvides insights| I[Expense Summary Report]
+
+    I -->|Final output delivered to| A
+
+    style A fill:#4CAF50,color:#fff
+    style B fill:#2196F3,color:#fff
+    style C fill:#9C27B0,color:#fff
+    style D fill:#FF9800,color:#fff
+    style G fill:#F44336,color:#fff
+    style I fill:#009688,color:#fff
