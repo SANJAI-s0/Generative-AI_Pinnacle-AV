@@ -1,0 +1,8 @@
+graph TD
+    User([User Input: Topic]) --> Agent[ReAct Agent]
+    Agent --> GenQ[Gemini: Generate Research Questions]
+    GenQ --> Search[Tavily: Web Search per Question]
+    Search --> Collect[Aggregate Search Results]
+    Collect --> GenReport[Gemini: Generate Markdown Report]
+    GenReport --> File[Save Report to /docs]
+    File --> User
