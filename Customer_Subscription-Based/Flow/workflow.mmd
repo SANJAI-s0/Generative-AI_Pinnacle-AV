@@ -1,0 +1,79 @@
+flowchart TD
+    A([🚀 Start: main.py]) --> B
+
+    subgraph DATA ["📦 Step 1 — Data Generation"]
+        B[generate_churn_dataset\nsrc/data_generator.py]
+        B --> B1[(5,000 Synthetic\nCustomers)]
+        B1 --> B2[data/customer_churn_data.csv]
+    end
+
+    B2 --> C
+
+    subgraph EDA ["🔍 Step 2 — Exploratory Data Analysis"]
+        C[run_eda\nsrc/eda.py]
+        C --> C1[Churn Distribution]
+        C --> C2[Churn by Plan]
+        C --> C3[Satisfaction vs Churn]
+        C --> C4[Engagement vs Churn]
+        C --> C5[Competitive Exposure]
+        C --> C6[Tenure Distribution]
+        C --> C7[Correlation Heatmap]
+        C1 & C2 & C3 & C4 & C5 & C6 & C7 --> C8[reports/plots/\n01–07 PNGs]
+    end
+
+    C8 --> D
+
+    subgraph MODEL ["🤖 Step 3 — Churn Prediction Model"]
+        D[train_and_evaluate\nsrc/churn_model.py]
+        D --> D1[Logistic Regression]
+        D --> D2[Random Forest]
+        D --> D3[Gradient Boosting]
+        D --> D4[XGBoost]
+        D1 & D2 & D3 & D4 --> D5{Best Model\nby AUC}
+        D5 --> D6[Model Comparison Plot]
+        D5 --> D7[ROC Curves]
+        D5 --> D8[Confusion Matrix]
+        D5 --> D9[Feature Importance]
+        D6 & D7 & D8 & D9 --> D10[reports/plots/\n08–11 PNGs]
+    end
+
+    D10 --> E
+
+    subgraph STRATEGY ["📊 Step 4 — Retention Strategy Simulation"]
+        E[simulate_impact\nsrc/retention_strategies.py]
+        E --> E1[Content Diversification]
+        E --> E2[Personalised Pricing Tiers]
+        E --> E3[Proactive Churn Intervention]
+        E --> E4[Engagement Re-activation]
+        E --> E5[Loyalty & Rewards Programme]
+        E --> E6[Budget Rebalancing 60/40]
+        E1 & E2 & E3 & E4 & E5 & E6 --> E7[Net Benefit Chart]
+        E1 & E2 & E3 & E4 & E5 & E6 --> E8[12-Month Forecast]
+        E1 & E2 & E3 & E4 & E5 & E6 --> E9[Budget Reallocation]
+        E7 & E8 & E9 --> E10[reports/plots/\n12–14 PNGs]
+    end
+
+    E10 --> F
+
+    subgraph REPORT ["📄 Step 5 — PDF Report Generation"]
+        F[generate_report\nsrc/report_generator.py]
+        F --> F1[Cover Page + KPIs]
+        F --> F2[Executive Summary]
+        F --> F3[Problem Statement\n& 5-Why Analysis]
+        F --> F4[EDA Findings]
+        F --> F5[ML Model Results]
+        F --> F6[Strategy Table & Details]
+        F --> F7[Roadmap & KPI Targets]
+        F --> F8[Conclusion]
+        F1 & F2 & F3 & F4 & F5 & F6 & F7 & F8 --> G
+    end
+
+    G([📑 reports/Customer_Retention_Analysis_Report.pdf])
+
+    style A fill:#2C3E50,color:#fff,stroke:none
+    style G fill:#27AE60,color:#fff,stroke:none
+    style DATA fill:#EBF5FB,stroke:#2980B9
+    style EDA fill:#EAFAF1,stroke:#27AE60
+    style MODEL fill:#FEF9E7,stroke:#F39C12
+    style STRATEGY fill:#FDEDEC,stroke:#E74C3C
+    style REPORT fill:#F4ECF7,stroke:#8E44AD
