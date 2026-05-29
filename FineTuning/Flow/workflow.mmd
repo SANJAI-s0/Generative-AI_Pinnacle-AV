@@ -1,0 +1,26 @@
+flowchart TD
+    A([🚀 Start]) --> B[Environment Setup\nInstall dependencies\ntransformers · peft · bitsandbytes]
+    B --> C[Data Preparation\nLoad IMDb 20k dataset\nfrom HuggingFace Hub]
+    C --> D[Tokenization\nbert-base-uncased\nmax_length=256]
+    D --> E[Train / Val / Test Split\n80% · 10% · 10%]
+    E --> F[4-bit Quantization Config\nNF4 · fp16 compute\nDouble Quantization]
+    F --> G[Load Base Model\nbert-base-uncased\nQuantized via BitsAndBytes]
+    G --> H[Prepare for k-bit Training\nFreeze base layers\nCast norms to fp32]
+    H --> I[Apply QLoRA Adapters\nLoRA rank r=16 · alpha=32\nTarget: query & value projections]
+    I --> J[Training Configuration\nEpochs=3 · LR=2e-4 · fp16\npaged_adamw_8bit · cosine LR]
+    J --> K[W&B Logging\nOptional · skipped if unavailable]
+    K --> L[Fine-Tuning\nHuggingFace Trainer\nEarly Stopping patience=2]
+    L --> M{Epoch Complete?}
+    M -- No --> L
+    M -- Yes --> N[Evaluation\nTest Set: Accuracy · F1\nConfusion Matrix]
+    N --> O[Efficiency Analysis\nParameter reduction\nMemory savings vs Full FT]
+    O --> P[Visualizations saved to Data/\nTraining curves · Comparison charts]
+    P --> Q([✅ Done])
+
+    style A fill:#4CAF50,color:#fff
+    style Q fill:#4CAF50,color:#fff
+    style F fill:#2196F3,color:#fff
+    style I fill:#9C27B0,color:#fff
+    style K fill:#9E9E9E,color:#fff
+    style L fill:#FF9800,color:#fff
+    style N fill:#00BCD4,color:#fff

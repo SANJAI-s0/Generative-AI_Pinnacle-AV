@@ -1,0 +1,53 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Model outputs & checkpoints
+qlora-bert-sentiment/
+*.pkl
+*.pt
+*.bin
+*.safetensors
+
+# Generated plots & artifacts
+*.png
+*.jpg
+*.jpeg
+dataset_stats.png
+confusion_matrix.png
+training_curves.png
+
+# W&B
+wandb/
+
+# Environment variables
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
