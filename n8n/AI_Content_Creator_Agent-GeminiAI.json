@@ -11,13 +11,13 @@
           ]
         }
       },
-      "id": "85f35426-9168-44d5-8668-b9acf0b47e10",
+      "id": "1703b9de-1b76-4f5b-add4-edb8eb6f7b99",
       "name": "Daily Content Schedule",
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.3,
       "position": [
-        -624,
-        -320
+        240,
+        304
       ]
     },
     {
@@ -38,17 +38,17 @@
         },
         "options": {}
       },
-      "id": "e7fefb4e-90f7-434e-87d3-8c414fab51f7",
+      "id": "74428425-acfb-4c53-8252-3621572d0b12",
       "name": "Fetch Pending Topic",
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -400,
-        -320
+        464,
+        304
       ],
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "2g7ITLNSlTzLtnR2",
+          "id": "ZQNrwvulmTZvS1cK",
           "name": "Google Sheets OAuth2 API"
         }
       }
@@ -77,13 +77,13 @@
         },
         "options": {}
       },
-      "id": "fecf3ea9-71ec-4edf-9036-1109c3e107fa",
+      "id": "c602100c-a507-4d07-985e-386757b312f0",
       "name": "Check Topic Exists",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -176,
-        -320
+        688,
+        304
       ]
     },
     {
@@ -94,7 +94,7 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{ {\"api_key\": \"<paste-your-API>\", \"query\": $json[\"Topic \"], \"search_depth\": \"advanced\", \"max_results\": 5} }}",
+        "jsonBody": "={{ {\"api_key\": \"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\", \"query\": $json[\"Topic \"], \"search_depth\": \"advanced\", \"max_results\": 5} }}",
         "options": {
           "response": {
             "response": {
@@ -103,17 +103,17 @@
           }
         }
       },
-      "id": "6e80536c-cf45-4c6c-acd0-de1373c3330a",
+      "id": "a3ff42df-dc24-4a7d-8250-f88e1e8e7295",
       "name": "Tavily Research",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        48,
-        -416
+        912,
+        208
       ],
       "credentials": {
         "httpHeaderAuth": {
-          "id": "D4dPVj0VXQzXXH4i",
+          "id": "5YedbmAPa2yvLQVf",
           "name": "Header Auth account"
         }
       }
@@ -126,13 +126,13 @@
         "fieldsToInclude": "results",
         "options": {}
       },
-      "id": "74210284-adf9-4968-808e-8d0be0f9b4ef",
+      "id": "9bdfb839-2a8f-4b2e-965c-fec4bb334d40",
       "name": "Aggregate Research Data",
       "type": "n8n-nodes-base.aggregate",
       "typeVersion": 1,
       "position": [
-        272,
-        -416
+        1136,
+        208
       ]
     },
     {
@@ -155,14 +155,131 @@
         },
         "options": {}
       },
-      "id": "24fadf3a-ff6a-483f-a060-532151a6545e",
+      "id": "54ef0279-c60a-4b63-a2f7-c885da80791e",
       "name": "Prepare Research Context",
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        496,
-        -416
+        1360,
+        208
       ]
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "responses": {
+          "values": [
+            {
+              "role": "system",
+              "content": "You are a professional LinkedIn content creator. Create engaging, professional posts that:\n- Start with a compelling hook\n- Use clear paragraphs with line breaks\n- Include relevant insights and actionable takeaways\n- End with a thought-provoking question\n- Use 2-3 relevant hashtags\n- Keep it between 150-200 words\n- Maintain a professional yet conversational tone"
+            },
+            {
+              "content": "={{ \"Topic: \" + $json.topic + \"\\n\\nResearch Context:\\n\" + $json.research_summary + \"\\n\\nCreate a LinkedIn post about this topic.\" }}"
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {
+          "maxTokens": 500,
+          "temperature": 0.7
+        }
+      },
+      "id": "3cdf8a49-5de5-4496-a58e-d2e1f0450e03",
+      "name": "Generate LinkedIn Post",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.1,
+      "position": [
+        1584,
+        208
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "YHkpRJIsBiAhVDWb",
+          "name": "n8n free OpenAI API credits"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "responses": {
+          "values": [
+            {
+              "role": "system",
+              "content": "You are a social media expert for X (Twitter). Create concise, engaging posts that:\n- Are under 280 characters\n- Start with a strong hook or insight\n- Use 1-2 relevant hashtags\n- Include an emoji for visual appeal\n- Are punchy and shareable\n- Drive engagement"
+            },
+            {
+              "content": "={{ \"Topic: \" + $(\"Prepare Research Context\").item.json.topic + \"\\n\\nResearch Context:\\n\" + $(\"Prepare Research Context\").item.json.research_summary + \"\\n\\nCreate a tweet about this topic.\" }}"
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {
+          "maxTokens": 100,
+          "temperature": 0.8
+        }
+      },
+      "id": "f7a22168-5d3d-4c83-8757-16548815f646",
+      "name": "Generate X Post",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.1,
+      "position": [
+        1936,
+        208
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "YHkpRJIsBiAhVDWb",
+          "name": "n8n free OpenAI API credits"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "responses": {
+          "values": [
+            {
+              "role": "system",
+              "content": "You are a professional blog writer. Create informative blog summaries that:\n- Are 150-200 words\n- Have a clear introduction, body, and conclusion\n- Include key insights and data points\n- Are well-structured and easy to read\n- Provide value to the reader\n- Use a professional yet accessible tone"
+            },
+            {
+              "content": "={{ \"Topic: \" + $(\"Prepare Research Context\").item.json.topic + \"\\n\\nResearch Context:\\n\" + $(\"Prepare Research Context\").item.json.research_summary + \"\\n\\nCreate a blog summary about this topic.\" }}"
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {
+          "maxTokens": 400,
+          "temperature": 0.7
+        }
+      },
+      "id": "8c5fc664-e2b0-4195-b824-36e57b5940e3",
+      "name": "Generate Blog Summary",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.1,
+      "position": [
+        2288,
+        208
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "YHkpRJIsBiAhVDWb",
+          "name": "n8n free OpenAI API credits"
+        }
+      }
     },
     {
       "parameters": {
@@ -183,19 +300,19 @@
             {
               "id": "3",
               "name": "LinkedIn_Post",
-              "value": "={{ $('Generate LinkedIn Post').item.json.content.parts[0].text }}",
+              "value": "={{ $(\"Generate LinkedIn Post\").item.json.output }}",
               "type": "string"
             },
             {
               "id": "4",
               "name": "X_Post",
-              "value": "={{ $('Generate X Post').item.json.content.parts[0].text }}",
+              "value": "={{ $(\"Generate X Post\").item.json.output }}",
               "type": "string"
             },
             {
               "id": "5",
               "name": "Blog_Summary",
-              "value": "={{ $json.content.parts[0].text }}",
+              "value": "={{ $(\"Generate Blog Summary\").item.json.output }}",
               "type": "string"
             },
             {
@@ -203,24 +320,18 @@
               "name": "Published_Date",
               "value": "={{ $now.toFormat(\"yyyy-MM-dd\") }}",
               "type": "string"
-            },
-            {
-              "id": "7",
-              "name": "row_number",
-              "value": "={{ $(\"Fetch Pending Topic\").first().json.row_number }}",
-              "type": "number"
             }
           ]
         },
         "options": {}
       },
-      "id": "7d8637ff-f688-48c8-92e4-c97c21686240",
+      "id": "51caa3a4-1b1e-4d7d-ba07-1dd5202446ea",
       "name": "Combine All Content",
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1776,
-        -416
+        2640,
+        208
       ]
     },
     {
@@ -243,78 +354,12 @@
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
-            "X_Post": "={{ $json.X_Post }}",
-            "Blog_Summary": "={{ $json.Blog_Summary }}",
-            "Published_Date": "={{ $json.Published_Date }}",
-            "Status ": "={{ $json.Status }}",
-            "LinkedIn_Post ": "={{ $json.LinkedIn_Post }}",
-            "row_number": 0,
-            "Topic ": "={{ $json.Topic }}"
+            "row_number": 0
           },
           "matchingColumns": [
-            "Topic "
+            "row_number"
           ],
           "schema": [
-            {
-              "id": "Topic ",
-              "displayName": "Topic ",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "Status ",
-              "displayName": "Status ",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "LinkedIn_Post ",
-              "displayName": "LinkedIn_Post ",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "X_Post",
-              "displayName": "X_Post",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "Blog_Summary",
-              "displayName": "Blog_Summary",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "Published_Date",
-              "displayName": "Published_Date",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
             {
               "id": "row_number",
               "displayName": "row_number",
@@ -332,17 +377,17 @@
         },
         "options": {}
       },
-      "id": "b4d34361-1172-4036-887e-a6fc8c854223",
+      "id": "b4c55973-ed6a-49dd-9050-ec0076a39629",
       "name": "Update Google Sheet",
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        2000,
-        -416
+        2864,
+        208
       ],
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "2g7ITLNSlTzLtnR2",
+          "id": "ZQNrwvulmTZvS1cK",
           "name": "Google Sheets OAuth2 API"
         }
       }
@@ -361,125 +406,14 @@
         },
         "options": {}
       },
-      "id": "d7156de1-abb2-47a0-9dfc-c2736038cbde",
+      "id": "f42272ca-6e7e-4b95-9ad0-08edcfa4fca7",
       "name": "No Topic Found",
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        48,
-        -224
+        912,
+        400
       ]
-    },
-    {
-      "parameters": {
-        "modelId": {
-          "__rl": true,
-          "value": "models/gemini-2.5-flash",
-          "mode": "list",
-          "cachedResultName": "models/gemini-2.5-flash"
-        },
-        "messages": {
-          "values": [
-            {
-              "content": "={{ \"Topic: \" + $json.topic + \"\\n\\nResearch Context:\\n\" + $json.research_summary + \"\\n\\nCreate a LinkedIn post about this topic.\" }}"
-            }
-          ]
-        },
-        "builtInTools": {},
-        "options": {
-          "systemMessage": "You are a professional LinkedIn content creator. Create engaging, professional posts that:\n- Start with a compelling hook\n- Use clear paragraphs with line breaks\n- Include relevant insights and actionable takeaways\n- End with a thought-provoking question\n- Use 2-3 relevant hashtags\n- Keep it between 150-200 words\n- Maintain a professional yet conversational tone",
-          "maxOutputTokens": 1000,
-          "temperature": 0.7
-        }
-      },
-      "id": "0928edb0-4f3b-4082-be2c-4e348ee5e76d",
-      "name": "Generate LinkedIn Post",
-      "type": "@n8n/n8n-nodes-langchain.googleGemini",
-      "typeVersion": 1.1,
-      "position": [
-        720,
-        -416
-      ],
-      "credentials": {
-        "googlePalmApi": {
-          "id": "7MT12seV5AN5tLHp",
-          "name": "Google Gemini(PaLM) Api account 2"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "modelId": {
-          "__rl": true,
-          "value": "models/gemini-2.5-flash",
-          "mode": "list",
-          "cachedResultName": "models/gemini-2.5-flash"
-        },
-        "messages": {
-          "values": [
-            {
-              "content": "={{ \"Topic: \" + $(\"Prepare Research Context\").item.json.topic + \"\\n\\nResearch Context:\\n\" + $(\"Prepare Research Context\").item.json.research_summary + \"\\n\\nCreate a tweet about this topic.\" }}"
-            }
-          ]
-        },
-        "builtInTools": {},
-        "options": {
-          "systemMessage": "You are a social media expert for X (Twitter). Create concise, engaging posts that:\n- Are under 280 characters\n- Start with a strong hook or insight\n- Use 1-2 relevant hashtags\n- Include an emoji for visual appeal\n- Are punchy and shareable\n- Drive engagement",
-          "maxOutputTokens": 200,
-          "temperature": 0.8
-        }
-      },
-      "id": "76c2abdf-cfa1-4ad5-a206-414dfb6fe570",
-      "name": "Generate X Post",
-      "type": "@n8n/n8n-nodes-langchain.googleGemini",
-      "typeVersion": 1.1,
-      "position": [
-        1072,
-        -416
-      ],
-      "credentials": {
-        "googlePalmApi": {
-          "id": "7MT12seV5AN5tLHp",
-          "name": "Google Gemini(PaLM) Api account 2"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "modelId": {
-          "__rl": true,
-          "value": "models/gemini-2.5-flash",
-          "mode": "list",
-          "cachedResultName": "models/gemini-2.5-flash"
-        },
-        "messages": {
-          "values": [
-            {
-              "content": "={{ \"Topic: \" + $(\"Prepare Research Context\").item.json.topic + \"\\n\\nResearch Context:\\n\" + $(\"Prepare Research Context\").item.json.research_summary + \"\\n\\nCreate a comprehensive blog summary about this topic. Use all the research data provided to create detailed, informative content.\" }}"
-            }
-          ]
-        },
-        "builtInTools": {},
-        "options": {
-          "systemMessage": "You are a professional blog writer. Create comprehensive, informative blog summaries that:\n- Are 250-350 words minimum (aim for detailed content)\n- Have a clear introduction that hooks the reader\n- Include multiple paragraphs covering different aspects of the topic\n- Incorporate specific insights, data points, and examples from the research\n- Use subheadings or clear topic transitions\n- Provide actionable takeaways or key learnings\n- End with a strong conclusion or call-to-action\n- Use a professional yet accessible tone\n- Make full use of the research context provided - do not summarize briefly, expand on the details",
-          "maxOutputTokens": 2048,
-          "temperature": 0.7
-        }
-      },
-      "id": "992e0daf-1d21-4937-a868-29b1244c8ca9",
-      "name": "Generate Blog Summary",
-      "type": "@n8n/n8n-nodes-langchain.googleGemini",
-      "typeVersion": 1.1,
-      "position": [
-        1424,
-        -416
-      ],
-      "credentials": {
-        "googlePalmApi": {
-          "id": "7MT12seV5AN5tLHp",
-          "name": "Google Gemini(PaLM) Api account 2"
-        }
-      }
     }
   ],
   "pinData": {},
@@ -557,22 +491,6 @@
         ]
       ]
     },
-    "Combine All Content": {
-      "main": [
-        [
-          {
-            "node": "Update Google Sheet",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "No Topic Found": {
-      "main": [
-        []
-      ]
-    },
     "Generate LinkedIn Post": {
       "main": [
         [
@@ -605,18 +523,29 @@
           }
         ]
       ]
+    },
+    "Combine All Content": {
+      "main": [
+        [
+          {
+            "node": "Update Google Sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
-  "active": false,
+  "active": true,
   "settings": {
     "executionOrder": "v1",
     "binaryMode": "separate"
   },
-  "versionId": "4305aa58-2f55-4881-8ad6-305a4131ca8a",
+  "versionId": "88bc0f33-d765-4ad8-b74a-052fd51bbcb6",
   "meta": {
     "templateCredsSetupCompleted": true,
-    "instanceId": "61d5a7407931935b7b8054aab7d6d0c9d71c7749757610e0d0f4726279547003"
+    "instanceId": "b14946722061487b9c35513dbe77279448f52d8f4eec84d387a6dbc071525c81"
   },
-  "id": "LCzlg5BOseMolRxk",
+  "id": "tnafBmAwUW8V0Q3l",
   "tags": []
 }

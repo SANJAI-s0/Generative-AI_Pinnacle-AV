@@ -57,7 +57,6 @@ The workflow follows a linear pipeline with one conditional branch for graceful 
 ```
 n8n/
 ├── AI_Content_Creator_Agent-GeminiAI.json  ← Exported n8n workflow (Gemini)
-├── AI Content Creator Agent.json           ← Previous workflow (OpenAI/GPT-4o-mini)
 ├── README.md                               ← This file
 ├── LICENSE                                 ← MIT License
 ├── .gitignore
