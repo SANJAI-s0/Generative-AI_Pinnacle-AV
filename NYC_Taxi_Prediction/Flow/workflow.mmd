@@ -1,0 +1,13 @@
+graph TD
+    A[Raw Dataset] --> B[Data Loading & Cleaning]
+    B --> C[Outlier Removal]
+    C --> D[Feature Engineering]
+    D --> E[Haversine Distance Calculation]
+    D --> F[Time-based Feature Extraction]
+    E --> G[Model Training]
+    F --> G
+    G --> H[Linear Regression Baseline]
+    G --> I[Decision Tree Regressor]
+    H --> J[Model Evaluation]
+    I --> J
+    J --> K[Prediction Metrics]
