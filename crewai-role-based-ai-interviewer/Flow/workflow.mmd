@@ -1,0 +1,32 @@
+flowchart TD
+    A([🚀 User Opens App]) --> B{API Key Present?}
+    B -- Yes --> C[🟢 Live Mode\nCrewAI + GPT-4o-mini]
+    B -- No --> D[🟡 Demo Mode\nRule-based feedback]
+    C --> E[Select Job Role]
+    D --> E
+    E --> F[Click Start Interview]
+    F --> G[Load 6 Role-Specific Questions]
+
+    G --> H{More Questions?}
+    H -- Yes --> I[Display Question\nwith Progress Bar]
+    I --> J[User Types Answer]
+    J --> K[Submit Answer]
+    K --> L{Mode?}
+    L -- Live --> M[CrewAI Feedback Agent\nGPT-4o-mini]
+    L -- Demo --> N[Rule-Based Feedback\nLength-aware logic]
+    M --> O[Display Feedback]
+    N --> O
+    O --> P[Save to Session History]
+    P --> H
+
+    H -- No --> Q[Show Full Summary\nAll Q&A + Feedback]
+    Q --> R{Restart?}
+    R -- Yes --> E
+    R -- No --> S([✅ Session Complete])
+
+    style A fill:#4CAF50,color:#fff
+    style S fill:#4CAF50,color:#fff
+    style M fill:#2196F3,color:#fff
+    style N fill:#FF9800,color:#fff
+    style C fill:#2196F3,color:#fff
+    style D fill:#FF9800,color:#fff
