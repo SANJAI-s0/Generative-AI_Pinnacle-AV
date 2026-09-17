@@ -47,10 +47,17 @@ The repository is designed for **project-wise development, experimentation, and 
 | `ReAct` | Web research needs structured reasoning patterns. | ReAct-style research agent. | Web research agent using ReAct. | Reasoning, search |
 | `Sentiment_Analysis` | Sentiment interpretation across models is complex. | Compare BERT, LSTM, GRU, and RNN performance. | Sentiment analysis benchmark project. | NLP, sentiment |
 | `Travel_Assistant_AI` | Travelers need intelligent planning support. | AI travel assistant with recommendations. | Travel assistant project. | AI assistant, travel |
+| `WQI-WQP_using_DL_Neural_Network` | Water quality assessment requires reliable prediction. | Deep learning regression and classification for Water Quality Index and water quality categories. | CPCB water quality prediction project. | Deep learning, environmental AI |
+| `anova-health-classification-ml` | Insurance underwriting needs consistent health risk assessment. | Machine learning pipeline for healthy and unhealthy applicant classification. | Anova Insurance health classification model. | ML, healthcare, risk assessment |
+| `clothing-store-competitor-analyzer` | Retail entrepreneurs need timely local market intelligence. | Conversational Gemini and LangChain workflow with live competitor and footfall analysis. | Clothing store competitor analysis assistant. | Conversational AI, retail analytics |
+| `customer-churn-analysis-retention-strategy` | Subscription businesses need actionable churn insights. | End-to-end churn modeling and retention strategy simulation with automated reporting. | Customer churn analysis and retention planning pipeline. | ML, retention, business analytics |
+| `financial_image_scans` | Financial documents contain dense visual and numerical information. | Multimodal Gemini analysis of financial document images with role-based summaries. | Financial image scanning and insight generation tool. | Multimodal AI, Streamlit, finance |
+| `rag-qa-system` | Research paper review requires accurate answers with sources. | Retrieval-Augmented Generation system using embeddings, FAISS, and Gemini. | AI research paper question-answering system. | RAG, retrieval, LLMs |
+| `stock-analytics-api` | Market data and stock analysis need an accessible service interface. | FastAPI backend for company data, market prices, history, and technical insights. | Stock analytics API with a static demonstration frontend. | FastAPI, finance, APIs |
 
 ## Repository Highlights
 
-- 16 independent AI/ML/automation projects under one repository.
+- 23 independent AI/ML/automation projects under one repository.
 - Each project can be committed and pushed separately for cleaner history.
 - Root-level README, LICENSE, and `.gitignore` provide repository-wide conventions.
 - Includes workflow examples for Git, Python, Jupyter, and automation-based projects.
@@ -75,6 +82,13 @@ AV_Projects/
 ├── ReAct/
 ├── Sentiment_Analysis/
 ├── Travel_Assistant_AI/
+├── WQI-WQP_using_DL_Neural_Network/
+├── anova-health-classification-ml/
+├── clothing-store-competitor-analyzer/
+├── customer-churn-analysis-retention-strategy/
+├── financial_image_scans/
+├── rag-qa-system/
+├── stock-analytics-api/
 ├── README.md
 └── LICENSE
 ```
@@ -198,7 +212,14 @@ $projects = @(
     'NYC_Taxi_Prediction',
     'ReAct',
     'Sentiment_Analysis',
-    'Travel_Assistant_AI'
+    'Travel_Assistant_AI',
+    'WQI-WQP_using_DL_Neural_Network',
+    'anova-health-classification-ml',
+    'clothing-store-competitor-analyzer',
+    'customer-churn-analysis-retention-strategy',
+    'financial_image_scans',
+    'rag-qa-system',
+    'stock-analytics-api'
 )
 
 foreach ($project in $projects) {
