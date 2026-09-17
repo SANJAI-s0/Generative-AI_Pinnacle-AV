@@ -1,0 +1,21 @@
+graph TD
+    A[Data Acquisition: CPCB Water Quality Dataset] --> B[Data Preprocessing]
+    B --> B1[Locate Header & Clean Garbage Text]
+    B1 --> B2[Handle Missing Values: Median Filling]
+    B2 --> B3[Feature Type Conversion: Numeric Coercion]
+    B3 --> B4[Target Definition: WQI & Classification]
+    
+    B4 --> C[Data Splitting: Train/Test]
+    C --> D[Feature Scaling: StandardScaler]
+    
+    D --> E1[Deep Learning Regression Model]
+    D --> E2[Deep Learning Classification Model]
+    
+    E1 --> F1[WQI Prediction]
+    E2 --> F2[Water Quality Category Labeling]
+    
+    F1 --> G1[Evaluation: R2 Score, MAE]
+    F2 --> G2[Evaluation: Accuracy, F1-Score]
+    
+    G1 --> H[Model Finalization]
+    G2 --> H
