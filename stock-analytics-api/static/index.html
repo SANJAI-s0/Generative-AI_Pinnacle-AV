@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stock Analytics Frontend</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            margin: 40px;
+        }
+        h1 {
+            color: #333;
+        }
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 6px;
+            max-width: 700px;
+        }
+        input, button {
+            padding: 8px;
+            margin: 5px 0;
+            width: 100%;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        pre {
+            background: #222;
+            color: #0f0;
+            padding: 15px;
+            overflow-x: auto;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>📈 Stock Analytics API – Frontend</h1>
+
+<div class="container">
+
+    <label>Stock Symbol (e.g. AAPL, MSFT, TSLA)</label>
+    <input type="text" id="symbol" value="AAPL">
+
+    <button onclick="getCompany()">Get Company Info</button>
+    <button onclick="getMarket()">Get Market Data</button>
+    <button onclick="getHistory()">Get Historical Data</button>
+    <button onclick="getAnalysis()">Get Analysis</button>
+
+    <pre id="output">Response will appear here...</pre>
+
+</div>
+
+<script>
+const API_BASE = "";
+
+function showResult(data) {
+    document.getElementById("output").textContent =
+        JSON.stringify(data, null, 2);
+}
+
+function getSymbol() {
+    return document.getElementById("symbol").value;
+}
+
+async function getCompany() {
+    const symbol = getSymbol();
+    const res = await fetch(`${API_BASE}/company/${symbol}`);
+    showResult(await res.json());
+}
+
+async function getMarket() {
+    const symbol = getSymbol();
+    const res = await fetch(`${API_BASE}/market/${symbol}`);
+    showResult(await res.json());
+}
+
+async function getHistory() {
+    const symbol = getSymbol();
+    const res = await fetch(`${API_BASE}/history`, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            symbol: symbol,
+            startDate: "2023-01-01",
+            endDate: "2023-12-31",
+            interval: "1d"
+        })
+    });
+    showResult(await res.json());
+}
+
+async function getAnalysis() {
+    const symbol = getSymbol();
+    const res = await fetch(`${API_BASE}/analysis`, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            symbol: symbol,
+            startDate: "2023-01-01",
+            endDate: "2023-12-31"
+        })
+    });
+    showResult(await res.json());
+}
+</script>
+
+</body>
+</html>

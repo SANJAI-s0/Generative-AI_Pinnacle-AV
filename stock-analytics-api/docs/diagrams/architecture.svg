@@ -1,0 +1,68 @@
+<svg width="1200" height="800" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .box { fill:#f9fbfd; stroke:#2c3e50; stroke-width:2; rx:8; ry:8; }
+    .title { font: bold 16px Arial; fill:#2c3e50; }
+    .text { font: 14px Arial; fill:#2c3e50; }
+    .arrow { stroke:#2c3e50; stroke-width:2; marker-end:url(#arrowhead); }
+  </style>
+
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7"
+      refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2c3e50"/>
+    </marker>
+  </defs>
+
+  <!-- User -->
+  <rect x="500" y="30" width="200" height="60" class="box"/>
+  <text x="560" y="65" class="title">User / Browser</text>
+
+  <!-- Frontend -->
+  <rect x="470" y="130" width="260" height="80" class="box"/>
+  <text x="525" y="165" class="title">Frontend</text>
+  <text x="500" y="190" class="text">static/index.html</text>
+
+  <!-- FastAPI -->
+  <rect x="450" y="260" width="300" height="90" class="box"/>
+  <text x="530" y="300" class="title">FastAPI Application</text>
+  <text x="525" y="325" class="text">app/main.py</text>
+
+  <!-- APIs -->
+  <rect x="120" y="420" width="220" height="60" class="box"/>
+  <text x="150" y="455" class="text">Company API</text>
+
+  <rect x="360" y="420" width="220" height="60" class="box"/>
+  <text x="395" y="455" class="text">Market API</text>
+
+  <rect x="600" y="420" width="220" height="60" class="box"/>
+  <text x="630" y="455" class="text">History API</text>
+
+  <rect x="840" y="420" width="220" height="60" class="box"/>
+  <text x="870" y="455" class="text">Analysis API</text>
+
+  <!-- Services -->
+  <rect x="450" y="540" width="300" height="90" class="box"/>
+  <text x="520" y="575" class="title">Service Layer</text>
+  <text x="470" y="600" class="text">yahoo_client.py · analytics.py</text>
+
+  <!-- Yahoo -->
+  <rect x="450" y="680" width="300" height="80" class="box"/>
+  <text x="505" y="715" class="title">Yahoo Finance</text>
+  <text x="540" y="740" class="text">(yfinance)</text>
+
+  <!-- Arrows -->
+  <line x1="600" y1="90" x2="600" y2="130" class="arrow"/>
+  <line x1="600" y1="210" x2="600" y2="260" class="arrow"/>
+
+  <line x1="600" y1="350" x2="230" y2="420" class="arrow"/>
+  <line x1="600" y1="350" x2="470" y2="420" class="arrow"/>
+  <line x1="600" y1="350" x2="710" y2="420" class="arrow"/>
+  <line x1="600" y1="350" x2="950" y2="420" class="arrow"/>
+
+  <line x1="230" y1="480" x2="600" y2="540" class="arrow"/>
+  <line x1="470" y1="480" x2="600" y2="540" class="arrow"/>
+  <line x1="710" y1="480" x2="600" y2="540" class="arrow"/>
+  <line x1="950" y1="480" x2="600" y2="540" class="arrow"/>
+
+  <line x1="600" y1="630" x2="600" y2="680" class="arrow"/>
+</svg>
